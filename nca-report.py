@@ -18,15 +18,10 @@ def reportonfile( driverpt ):
 			linecount += 1
 			if fileline.lower().find(startstr) != -1:
 	   			ncatimestamp['START'] = linecount
-				# print "Line With START is :- ", linecount
 			if fileline.lower().find(stopstr) != -1:
 				ncatimestamp['STOP'] = linecount 	
- 				# print "Line With STOP is :- ", linecount
  			fileline = fo.readline()
-    # print filecontent
 	fo.close()
-	# print " - Line With START is :- ", linecache.getline(driverpt,ncatimestamp['START'])
-	# print " - Line With STOP is :- ", linecache.getline(driverpt,ncatimestamp['STOP'])
 
 	genline = driverpt + ';' + linecache.getline(driverpt,ncatimestamp['START']) + ';' + linecache.getline(driverpt,ncatimestamp['STOP'])
 	
@@ -50,7 +45,6 @@ filenames = ['report.py']
 counter = 0
 for file in dirs:
     filenames.insert(counter, path + file)
-    # print file
     counter += 1
 
 # Removing script file from the final report 
@@ -64,7 +58,6 @@ fwriter.write('FILE NAME ;START TIME ;START DATE ;STOP TIME ;STOP DATE ')
 fwriter.close()
 
 for spread in filenames:
-	# print spread
 	writedatasource = scrubdata(reportonfile(spread))
 	if writedatasource is not None:
 		fwriter = open(path + "zellsreport.csv","a+")
